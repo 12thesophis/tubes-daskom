@@ -1,0 +1,139 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+void loginadmin();
+void menuadmin();
+void tambahobatadmin();
+void lihatobat();
+void regisuser();
+int main() 
+{
+ int pilih;
+ printf("1.menu admin\n2.menu user\n3.exit");
+ scanf("%d",&pilih);
+switch (pilih)
+{
+    case 1:
+            loginadmin();
+            break;
+    case 2:
+
+}
+
+    return 0;
+}
+void loginadmin()
+{   int ulang=3;
+    struct
+    {
+        char nama_admin[50];
+        char password_admin[50];
+    }regisadmin;
+    
+   {
+    if (ulang==0)
+    {
+        printf("\nmaaf,percobaan habis");
+    }
+    else
+    {
+        printf("\nmasukkan username: ");
+        gets(regisadmin.nama_admin);
+        printf("masukkan password: ");
+        gets(regisadmin.password_admin);
+        if(strcmp(regisadmin.nama_admin,"rajan")==0 && strcmp(regisadmin.password_admin,"admin123")==0)
+            {
+                printf("selamat anda sudah login");
+            }
+        else
+            {   
+                printf("\nmaaf password atau username salah,percobaan anda tinggal %d",ulang-1);
+                batas(ulang-1);
+                return ulang-1;
+            }
+        }
+    }
+}
+void menuadmin()
+{
+    int pilihadmin;
+    printf("1.Membuat data obat baru\n2.Lihat obat\n3.Lihat riwayat pembelian");
+    scanf("%d",&pilihadmin);
+    switch(pilihadmin)
+    {
+        case 1:
+
+    }
+}
+void tambahobatadmin()
+{   
+    FILE *dataobat;
+    int n,i;
+    struct dataObat
+    {
+        char nama_obat[50];
+        char tipe_obat[50];
+        float harga_obat;
+    }dataO;
+    dataobat= fopen("Daftar Obat.dat","ab");
+
+    printf("masukkan banyak obat yang ingin ditambah: ");
+    scanf("%d",&n);
+    getchar();
+    
+    for(i=0;i<=n;i++)
+    {
+        printf("nama obat: ");
+        gets(dataO.nama_obat);
+        printf("tipe obat: ");
+        gets(dataO.tipe_obat);
+        printf("harga obat: ");
+        scanf("%f",&dataO.harga_obat);
+        getchar();
+        fwrite(&dataO,sizeof(dataO),1,dataobat);
+    }
+    fclose(dataobat);
+}
+void lihatobat()
+{   
+    FILE *dataobat;
+    struct dataObat
+    {
+        char nama_obat[50];
+        char tipe_obat[50];
+        float harga_obat;
+    }dataO;
+
+    dataobat= fopen("Daftar Obat.dat","rb");
+
+    while(fread(&dataO,sizeof(dataO),1,dataobat)==1)
+    {
+        printf("Nama Obat:%s\n",dataO.nama_obat);
+        printf("Tipe Obat:%s\n",dataO.tipe_obat);
+        printf("Harga obat:%f\n",dataO.harga_obat);
+    }
+}
+void regisuser()
+{
+    FILE *datauser;
+    int n,i;
+    struct
+    {
+        char username[50];
+        char password[50];
+    }dataU;
+    
+    datauser=fopen("Data User.dat","ab");
+    printf("Banyak user yang ingin ditambah: ");
+    scanf("%d",&n);
+    getchar();
+    for(i=0;i<=n;i++)
+    {
+        printf("Masukkan username: ");
+        gets(dataU.username);
+        printf("Masukkan password: ");
+        gets(dataU.password);
+        fwrite(&dataU,sizeof(dataU),1,datauser);
+    }
+    fclose(datauser);
+}
